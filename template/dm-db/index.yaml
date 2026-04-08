@@ -7,7 +7,7 @@ spec:
   author: 'Sealos'
   description: 'DM8（达梦数据库）单机版模板，基于 StatefulSet 部署并持久化数据库数据目录。'
   readme: ''
-  icon: ''
+  icon: 'https://www.dameng.com/static/cn/images/favicon.ico'
   templateType: inline
   categories:
     - database
@@ -29,14 +29,6 @@ spec:
 
 ---
 apiVersion: v1
-kind: Secret
-metadata:
-  name: ${{ defaults.app_name }}
-stringData:
-  sysdba_password: ${{ inputs.sysdba_password }}
-
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ${{ defaults.app_name }}-config
@@ -55,10 +47,10 @@ data:
     BAK_PATH                        = /opt/dmdbms/data/DAMENG/bak             #backup file path
     XBOX_DUMP_PATH                  =                       #xbox_dump_path
     BCT_PATH                        = /opt/dmdbms/data/DAMENG                     #BCT file path
-      
+    
       #instance name
     INSTANCE_NAME                   = INSTANCE                                    #Instance name
-      
+    
       #memory pool and buffer
     MAX_OS_MEMORY                   = 100                   #Maximum Percent Of OS Memory
     MEMORY_POOL                     = 2000                  #Memory Pool Size In Megabyte
@@ -117,7 +109,7 @@ data:
     SORT_OPT_SIZE                   = 0                     #once max memory size of radix sort assist count array
     TSORT_OPT                       = 1                     #minimizing memory allocation during small rowset sorting if possible
     BIND_PLN_PERCENT                = 30                    #Maximum percent of bind plan in plan cache pool
-      
+    
       #other
     IDLE_MEM_THRESHOLD              = 50                    #minimum free memory warning size in Megabytes
     FBACK_HASH_SIZE                 = 10000                 #hash table size for flashback function
@@ -128,7 +120,7 @@ data:
     NDCT_CACHE_PLL                 = 0                     #Whether to enable parallel dict cache looking up
     NDCT_LOAD_OPT                  = 1                     #Whether to enable dict load optimization
     REGEX_MEM_LIMIT                 = 20                    #REGEX memory limit(MB)
-      
+    
       #thread
     WORKER_THREADS                  = 64                    #Number Of Worker Threads
     TASK_THREADS                    = 32                    #Number Of Task Threads
@@ -147,7 +139,7 @@ data:
     MAX_SEC_ASYNC_THREADS           = 0                     #Maximum number of asynchronous maintenance threads for second index
     ASYNC_THRD_MAX_PERCENT          = 100                   #Maximum percent of work threads for asynchronous tasks
     MAX_CONCURRENT_PTHD_NUM         = 0                     #Maximum num of parallel when concurrent
-      
+    
       #query
     USE_PLN_POOL                    = 1                     #Query Plan Reuse Mode, 0: Forbidden; 1:strictly reuse, 2:parsing reuse, 3:mixed parsing reuse
     DYN_SQL_CAN_CACHE               = 1                     #Dynamic SQL cache mode. 0: Forbidden; 1: Allowed if the USE_PLN_POOL is non-zero;
@@ -297,7 +289,7 @@ data:
     DDL_OPT_FLAG                 =  0                     #DDL related parameters
     DIGIT_AS_NUMBER                 = 0                     #Treat digit constants as number when using constant to parameter option
     DIST_OPT_FLAG                  = 0                     #Whether enable distinct Optimization
-      
+    
       #checkpoint
     CKPT_RLOG_SIZE                  = 1024                  #Checkpoint Rlog Size, 0: Ignore; else: Generate With Redo Log Size
     CKPT_DIRTY_PAGES                = 0                     #Checkpoint Dirty Pages, 0: Ignore; else: Generate With Dirty Pages
@@ -308,7 +300,7 @@ data:
     FORCE_FLUSH_PAGES               = 8                     #number of periodic flushed pages
     ENABLE_CKPT_EVENT_TRIG          = 0                     #Whether enable checkpoint event trigger, 0: disable; 1: enable
     CKPT_FORCE_WAIT_PAGES           = 1024                  #Maximum number of pages flushed for checkpoints while unsafe rlog space
-      
+    
       #IO
     DIRECT_IO                       = 0                     #Flag For Io Mode(Non-Windows Only), 0: Using File System Cache; 1: Without Using File System Cache
     IO_THR_GROUPS                   = 32                    #The Number Of Io Thread Groups(Non-Windows Only)
@@ -317,7 +309,7 @@ data:
     FAST_EXTEND_WITH_DS             = 1                     #How To Extend File's Size (Non-Windows Only), 0: Extend File With Hole; 1: Extend File With Disk Space
     FIL_CHECK_MODE                  = 0                     #Whether to halt when system file doesn't exist, 0:no_halt, 1:halt(Non-Windows Only)
     IO_MODE                         = 0                      #Mode to optimize IO, 0: No optimization; 1: Merge write
-      
+    
       #database
     MAX_SESSIONS                    = 5000                  #Maximum number of concurrent sessions
     MAX_CONCURRENT_TRX              = 0                     #Maximum number of concurrent transactions
@@ -526,14 +518,14 @@ data:
     INDTAB_MODE                    = 0                     #indtab data structure, 0: red-black tree, 1: dynamic hash table
     NETSVR_SHM_KEY                  = 0                     #Share memory key  for local netsvr
     TSMV_FCOPY_STEP               = 4096                  #File copy step for tablespace move in dpc
-      
+    
       #pre-load
     LOAD_TABLE                      =                       #need to pre-load table
     LOAD_HTABLE                     =                       #need to pre-load htable
-      
+    
       #client cache
     CLT_CACHE_TABLES                =                       #Tables that can be cached in client
-      
+    
       #redo log
     RLOG_BUF_SIZE                   = 1024                  #The Number Of Log Pages In One Log Buffer
     RLOG_POOL_SIZE                  = 2048                  #Redo Log Pool Size In Megabyte
@@ -559,7 +551,7 @@ data:
     LOGMNR_PARSE_LOB               = 0                    #Whether to parse LOB logic log using DBMS_LOGMNR, 0: FALSE, 1: TRUE
     LOGMNR_GEN_UNDO                 = 0                     #Whether to generate SQL undo for DBMS_LOGMNR, 0: FALSE, 1: TRUE
     RLOG_PARALLEL_NUM              = 16                    #The parallel level of Redo log
-      
+    
       #redo redos
     REDO_PWR_OPT                    = 1                     #Whether to enable PWR optimization when system restarted after failure
     REDO_IGNORE_DB_VERSION          = 0                     #Whether to check database version while database is redoing logs
@@ -575,7 +567,7 @@ data:
     REDOS_RPKG_FILL_NUM             = 64                    #The max rpkg num to filled for parallel redo
     REDOS_WAIT_TIMEOUT              = 60                    #Sync standby wait dps timeout time (s).
     COMMIT_BATCH                    = 1                     #Transaction commit redo log batch flush
-      
+    
       #transaction
     ISOLATION_LEVEL                 = 1                     #Default Transaction Isolation Level, 1: Read Commited; 3: Serializable
     DDL_WAIT_TIME                   = 10                    #Maximum waiting time in seconds for DDLs
@@ -666,7 +658,7 @@ data:
     ENC_TYPE                        = 1                     #Type of encryption, 0: No EVP 1: EVP first
     AUDIT_KEEP_DAYS                = 0                     #The minimum number of days to retain audit log files
     SSL_SECURITY_LEVEL               = 0                     #SSL security level
-      
+    
       #compatibility
     BACKSLASH_ESCAPE                = 0                     #Escape Mode For Backslash, 0: Not Escape; 1: Escape
     STR_LIKE_IGNORE_MATCH_END_SPACE = 1                     #Whether to ignore end space of strings in like clause
@@ -742,11 +734,11 @@ data:
     BATCH_INSERT_ROWS               = 10                    #Batch insert rows
     INDEX_FINS_FLAG                 = 0                    #Flag of fast insert second index
     ELOG_REPORT_LINK_SQL            = 0                     #Whether to write the SQLs that sent to remote database by DBLINKs into error log file
-      
+    
       #request trace
     SVR_LOG_NAME                    = SLOG_ALL              #Using which sql log sys in sqllog.ini
     SVR_LOG                         = 0                     #Whether the Sql Log sys Is open or close. 1:open, 0:close, 2:use switch and detail mode. 3:use not switch and simple mode. 
-      
+    
       #system trace
     GDB_THREAD_INFO                 = 0                     #Generate gdb thread info while dm_sys_halt. 1: yes; 0: no
     TRACE_PATH                      =                       #System trace path name
@@ -764,7 +756,7 @@ data:
     ELOG_LANGUAGE_FLAG              = 0                     #elog_language_flag, 1:CN, 0:EN
     CORE_DUMP_FLAG                  = 1                     #Whether to dump some info before core
     AP_PORT_NUM                     = 0                     #Port number on which the database ap will listen
-      
+    
       #monitor
     ENABLE_MONITOR                  = 1                     #Whether to enable monitor
     MONITOR_SQL_EXEC                = 0                     #Whether to enable monitor sql execute
@@ -787,7 +779,7 @@ data:
     DMSQL_ET_CNT                 = 10000                 #Max row count of V$DMSQL_EXEC_TIME
     DMSQL_EXEC_THRESHOLD           = 0                     #Monitoring threshold for DMSQL execution time
     MONITOR_COLUMNS                 = 0                     #Whether to monitor the filtering condition feature infomation of the columns
-      
+    
       #data watch
     DW_MAX_SVR_WAIT_TIME            = 0                     #Maximum time in seconds that server will wait for DMWATCHER to startup
     DW_INACTIVE_INTERVAL            = 60                    #Time in seconds that used to determine whether DMWATCHER exist
@@ -810,7 +802,7 @@ data:
     ELOG_ARCH_TIMEOUT              =0                      #Archive task timeout printing time, if timeout occurs, print a log (ms).
     REDOS_RECV_PLL_NUM              = 0                     #The parallel redo thread num in recovery
     RPKG_PROCESS_TIMEOUT              =0                      #RLOG package process timeout time, if timeout occurs, generate a record (ms).
-      
+    
       #for context index
     CTI_HASH_SIZE                   = 100000                #the hash table size for context index query
     CTI_HASH_BUF_SIZE               = 50                    #the hash table cache size in Megabytes for context index query
@@ -818,7 +810,7 @@ data:
     MAX_SEND_WR                     = 128                   #Maximum number of outstanding send requests in the send queue
     MAX_RECV_WR                     = 512                   #Maximum number of outstanding receive requests in the receive queue
     CQ_MOD                          = 100                   #Every N WRs will generate one completion queue event(CQE)
-      
+    
       #configuration file
     MAL_INI                         = 0                     #dmmal.ini
     ARCH_INI                        = 0                     #dmarch.ini
@@ -909,13 +901,12 @@ spec:
           image: sealos.hub:5000/dm8:dm8_20251013_rev286012_x86_centos7_64
           imagePullPolicy: Always
           env:
+            - name: SYSDBA_USER
+              value: SYSDBA
             - name: MODE
               value: dmsingle
             - name: SYSDBA_PWD
-              valueFrom:
-                secretKeyRef:
-                  name: ${{ defaults.app_name }}
-                  key: sysdba_password
+              value: ${{ inputs.sysdba_password }}
           ports:
             - containerPort: 5236
               name: dm
